@@ -1,0 +1,36 @@
+{
+    "0": [
+        "./LC25000/lung_scc/lungscc1302.jpeg",
+        "./LC25000/lung_scc/lungscc1593.jpeg",
+        "./LC25000/lung_scc/lungscc1827.jpeg",
+        "./LC25000/lung_scc/lungscc1892.jpeg",
+        "./LC25000/lung_scc/lungscc2063.jpeg",
+        "./LC25000/lung_scc/lungscc2300.jpeg",
+        "./LC25000/lung_scc/lungscc2479.jpeg",
+        "./LC25000/lung_scc/lungscc2901.jpeg",
+        "./LC25000/lung_scc/lungscc3559.jpeg",
+        "./LC25000/lung_scc/lungscc3617.jpeg",
+        "./LC25000/lung_scc/lungscc451.jpeg",
+        "./LC25000/lung_scc/lungscc4964.jpeg",
+        "./LC25000/lung_scc/lungscc562.jpeg"
+    ],
+    "1": [
+        "./LC25000/lung_scc/lungscc1823.jpeg",
+        "./LC25000/lung_scc/lungscc1947.jpeg",
+        "./LC25000/lung_scc/lungscc207.jpeg",
+        "./LC25000/lung_scc/lungscc3326.jpeg",
+        "./LC25000/lung_scc/lungscc3489.jpeg",
+        "./LC25000/lung_scc/lungscc4500.jpeg",
+        "./LC25000/lung_scc/lungscc4613.jpeg",
+        "./LC25000/lung_scc/lungscc4669.jpeg",
+        "./LC25000/lung_scc/lungscc4847.jpeg",
+        "./LC25000/lung_scc/lungscc4848.jpeg",
+        "./LC25000/lung_scc/lungscc681.jpeg",
+        "./LC25000/lung_scc/lungscc750.jpeg",
+        "./LC25000/lung_scc/lungscc83.jpeg",
+        "./LC25000/lung_scc/lungscc992.jpeg"
+    ],
+    "2": [
+        "./LC25000/lung_scc/lungscc2921.jpeg"
+    ]
+}

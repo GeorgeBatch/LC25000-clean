@@ -1,0 +1,10 @@
+.ipynb_checkpoints
+__pycache__
+
+LC25000.zip
+LC25000
+
+# pre-computed feature vectors
+feature_vectors
+# pre-trained weights, e.g. for the DSMIL models
+weights

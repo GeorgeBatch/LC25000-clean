@@ -1,0 +1,27 @@
+[flake8]
+ignore = E203, W503
+
+extend-ignore = PIE803,T003,Q000,E203,W503,E501,W505,Q000,LN001,S101,N806,PIE786,N815,VNE003,R504,VNE001,CCR001
+
+exclude =
+    __pycache__,
+    .eggs,
+    .git,
+    .hg,
+    .mypy_cache,
+    .tox,
+    .venv,
+    venv,
+    _build,
+    buck-out,
+    build,
+    dist,
+    .github,
+    .pytest_cache,
+    LC25000,
+    feature_vectors,
+    .ipynb_checkpoints
+
+max-line-length = 120
+inline-quotes = "
+max-cognitive-complexity = 15
