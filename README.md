@@ -190,3 +190,12 @@ To evaluate a new model on the cleaned dataset, follow these steps:
 3. Evaluate the features using the `evaluate_clustering.py` script. You can add other dimensionality reduction techniques and clustering algorithms to the script if needed by modifying `reduce_feature_dimensionality()` and `get_clustering_labels()` in [source/eval_utils.py](./source/eval_utils.py)
 4. Analyze the evaluation results using the [4-analyze-clustering-results.ipynb](./4-analyze-clustering-results.ipynb) notebook.
 5. Run classification experiments using the [5-one-shot-and-linear-probing.ipynb](./5-one-shot-and-linear-probing.ipynb) notebook.
+
+## Acknowledgements
+
+George Batchkala is supported by Fergus Gleeson's A2 research funds, UKRI DART Lung Health Program (Innovate UK grant 40255), and the EPSRC Center for Doctoral Training in Health Data Science (EP/S02428X/1).
+
+This project relied on other repositories.
+1. feature extraction: [UNI](https://github.com/mahmoodlab/UNI/), [Prov-GigaPath](https://github.com/prov-gigapath/prov-gigapath), [Phikon](https://github.com/owkin/HistoSSLscaling/), [DINOv2](https://github.com/facebookresearch/dinov2), [dsmil-wsi](https://github.com/binli123/dsmil-wsi)
+2. dimensionality reduction and clustering: [scikit-learn](https://github.com/scikit-learn/scikit-learn)
+
