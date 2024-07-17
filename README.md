@@ -1,7 +1,7 @@
 # LC25000-clean histopathology benchmark
 
 ## Evaluating Histopathology Foundation Models for Few-shot Tissue Clustering: an Application to LC25000 Augmented Dataset Cleaning
-*MICCAI 2024, 2nd Workshop on Data Engineering in Medical Imaging (DEMI)*
+*Accepted to: MICCAI 2024, 2nd Workshop on Data Engineering in Medical Imaging (DEMI)*
 
 [Paper Link](to-be-added) | [Open Access Read Link](to-be-added) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | [Cite](to-be-added) 
 
