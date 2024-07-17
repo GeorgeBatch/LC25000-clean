@@ -1,5 +1,10 @@
 # LC25000-clean histopathology benchmark
 
+## Evaluating Histopathology Foundation Models for Few-shot Tissue Clustering: an Application to LC25000 Augmented Dataset Cleaning
+*MICCAI 2024, 2nd Workshop on Data Engineering in Medical Imaging (DEMI)*
+
+[Paper Link](to-be-added) | [Open Access Read Link](to-be-added) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | [Cite](to-be-added) 
+
 The LC25000 Dataset is a widely used histology image dataset. The samples in the dataset contain highly correlated images, thus resulting in data leakage if models are both trained and evaluated on it. This repository contains (1) the cleaned dataset with highly correlated images grouped together, (2) the code for the semi-automatic cleaning pipeline, (3) the evaluation code for using the cleaned dataset as a minimal setup benchmark for new histopathology foundation models.
 
 ## About LC25000 Dataset
