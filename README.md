@@ -3,7 +3,9 @@
 ## Evaluating Histopathology Foundation Models for Few-shot Tissue Clustering: an Application to LC25000 Augmented Dataset Cleaning
 *Accepted to: MICCAI 2024, 2nd Workshop on Data Engineering in Medical Imaging (DEMI)*
 
-Paper Link | [Open Access (from October 2025)](https://ora.ox.ac.uk/objects/uuid:df7ad16b-f130-4f16-8f7f-aab5de53f111) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | [Cite](#cite)
+Paper Link | [Open Access Record*](https://ora.ox.ac.uk/objects/uuid:df7ad16b-f130-4f16-8f7f-aab5de53f111) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | [Cite](#cite)
+
+*Full open-access text will be available after the embargo period from October 2025.
 
 **Abstract:** Recent digital histopathology datasets have significantly advanced the development of deep learning-based histopathology frameworks. 
 However, data leakage in model training can lead to artificially high metrics that do not genuinely reflect the strength of the approach.
