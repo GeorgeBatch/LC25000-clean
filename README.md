@@ -3,7 +3,7 @@
 ## Evaluating Histopathology Foundation Models for Few-shot Tissue Clustering: an Application to LC25000 Augmented Dataset Cleaning
 *Accepted to: MICCAI 2024, 2nd Workshop on Data Engineering in Medical Imaging (DEMI)*
 
-Paper Link | [Open Access (from October 2025)](https://ora.ox.ac.uk/objects/uuid:df7ad16b-f130-4f16-8f7f-aab5de53f111) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | Cite 
+Paper Link | [Open Access (from October 2025)](https://ora.ox.ac.uk/objects/uuid:df7ad16b-f130-4f16-8f7f-aab5de53f111) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | [Cite](#cite)
 
 **Abstract:** Recent digital histopathology datasets have significantly advanced the development of deep learning-based histopathology frameworks. 
 However, data leakage in model training can lead to artificially high metrics that do not genuinely reflect the strength of the approach.
@@ -199,3 +199,17 @@ This project relied on other repositories.
 1. feature extraction: [UNI](https://github.com/mahmoodlab/UNI/), [Prov-GigaPath](https://github.com/prov-gigapath/prov-gigapath), [Phikon](https://github.com/owkin/HistoSSLscaling/), [DINOv2](https://github.com/facebookresearch/dinov2), [dsmil-wsi](https://github.com/binli123/dsmil-wsi)
 2. dimensionality reduction and clustering: [scikit-learn](https://github.com/scikit-learn/scikit-learn)
 
+## Cite
+
+Pre-publication citation. Will be updated after the workshop date (10th of October 2024).
+
+```
+@inproceedings{batchkala2024lc25000-clean,
+  title = {Evaluating histopathology foundation models for few-shot tissue clustering: an application to LC25000 augmented dataset cleaning},
+  author = {Batchkala, G and Li, B and Rittscher, J},
+  editor = {Bhattarai, B and Ali, S and Rau, A and Caramalau, R and Nguyen, A and Gyawali, P and Namburete, A and Stoyanov, D},
+  year = {2024},
+  organizer = {2nd International Workshop on Data Engineering in Medical Imaging (DEMI 2024) at MICCAI 2024},
+  publisher = {Springer Nature Switzerland},
+}
+```
