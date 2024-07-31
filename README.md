@@ -121,6 +121,9 @@ After the clustering, pick the image closest to the cluster centroid to be the r
 
 **Notebook:** [2-clustering-interactive.ipynb](./2-clustering-interactive.ipynb)
 
+![Semi-automatic Annotation Framework](./assets/manual-annotation-schema.png)
+
+
 ## 3. Evaluation of the Features
 
 The features was evaluated by using the manual annotations as the ground truth. The features were evaluated using the following metrics:
@@ -167,6 +170,11 @@ Other arguments:
 - `--verbose`: Print the evaluation metrics
 
 
+![FMI and Precision@5](./assets/basic-subset-FMI-precision-at-5-bar-chart.png)
+
+![Clustering Performance](./assets/basic-subset-clustering-performance-wo-precision-best-img-norm-line-plot.png)
+
+
 ## 4. Analysis of the Evaluation Results
 
 To reproduce plots from the paper, run the notebook [4-analyze-clustering-results.ipynb](./4-analyze-clustering-results.ipynb).
@@ -181,6 +189,11 @@ The cleaned dataset was used to understand how much the performance was affected
 * 2 classifiers: KNN and Linear
 
 **Notebook:** [5-one-shot-and-linear-probing.ipynb](./5-one-shot-and-linear-probing.ipynb.ipynb)
+
+![Classification Performance](./assets/lc25000-classification-results.png)
+
+![Visualisation in Feature Space](./assets/lung-feature-vis-imagenet-norm-pca-2.png)
+
 
 ## Evaluating a New Model
 
