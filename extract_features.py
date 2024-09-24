@@ -92,7 +92,7 @@ def calculate_dataset_mean_std(img_dir, batch_size, decimals=4):
     mean /= n_pixels
 
     # ------------------------------------------------------------------------------
-    print("Calculating mean for the dataset (needed the mean)...")
+    print("Calculating variance for the dataset (needed the mean)...")
     for batch in tqdm(dataloader):
         images = batch['image']
 
