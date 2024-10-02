@@ -58,6 +58,10 @@ ALL_EXTRACTOR_MODELS = (
     'UNI',
     'prov-gigapath',
     'owkin-phikon',
+    'owkin-phikon-v2',
+    'hibou-b',
+    'hibou-L',
+    'H-optimus-0',
     'simclr-tcga-lung_resnet18-10x',
     'simclr-tcga-lung_resnet18-2.5x',
 )
