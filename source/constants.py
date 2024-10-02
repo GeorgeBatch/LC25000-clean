@@ -17,11 +17,11 @@ ANNOTATIONS_SAVE_DIR = osp.join(PROJECT_PATH, 'annotations')
 NUM_TOTAL_IMAGES = 25000
 NUM_CLASS_IMAGES = 5000
 NUM_CLASSES = 5
-assert NUM_TOTAL_IMAGES == NUM_CLASS_IMAGES * NUM_CLASSES, "NUM_TOTAL_IMAGES should be equal to NUM_CLASS_IMAGES * NUM_CLASSES"
+assert NUM_TOTAL_IMAGES == NUM_CLASS_IMAGES * NUM_CLASSES, 'NUM_TOTAL_IMAGES should be equal to NUM_CLASS_IMAGES * NUM_CLASSES'
 
 NUM_CLASS_PROTOTYPES = 250  # every class has 250 prototypes, 1250 prototypes in total (5 classes * 250 prototypes per class)
 AVG_NUM_DUPLICATES_PER_CLASS_PROTOTYPE = 20
-assert NUM_CLASS_IMAGES == NUM_CLASS_PROTOTYPES * AVG_NUM_DUPLICATES_PER_CLASS_PROTOTYPE, "NUM_CLASS_IMAGES should be equal to NUM_CLASS_PROTOTYPES * AVG_NUM_DUPLICATES_PER_CLASS_PROTOTYPE"
+assert NUM_CLASS_IMAGES == NUM_CLASS_PROTOTYPES * AVG_NUM_DUPLICATES_PER_CLASS_PROTOTYPE, 'NUM_CLASS_IMAGES should be equal to NUM_CLASS_PROTOTYPES * AVG_NUM_DUPLICATES_PER_CLASS_PROTOTYPE'
 
 
 ALL_TISSUE_TYPES = (
@@ -33,7 +33,7 @@ ALL_CANCER_TYPES = (
     'colon_aca', 'colon_n',
     'lung_aca', 'lung_n', 'lung_scc',
 )
-assert len(ALL_CANCER_TYPES) == NUM_CLASSES, "Number of cancer types should match NUM_CLASSES"
+assert len(ALL_CANCER_TYPES) == NUM_CLASSES, 'Number of cancer types should match NUM_CLASSES'
 
 ALL_IMG_NORMS = (
     'imagenet',
@@ -82,7 +82,7 @@ EXTRACTOR_NAMES_2_WEIGHTS_PATHS = {
 }
 
 ALL_DIMENSIONALITY_REDUCTION_METHODS = [
-    "NoReduction",
+    'NoReduction',
     # PCA: Proportion of variance explained
     'PCA-0.9',
     'PCA-0.95',
