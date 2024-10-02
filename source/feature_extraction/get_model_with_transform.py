@@ -5,6 +5,7 @@ import torchvision
 from torchvision.models import ResNet18_Weights
 
 import timm
+from transformers import AutoImageProcessor, AutoModel
 
 # # need to be installed in the environment
 # import uni  # https://github.com/mahmoodlab/UNI/?tab=readme-ov-file#installation
@@ -114,7 +115,12 @@ def get_feature_extractor(extractor_name):
             "hf_hub:prov-gigapath/prov-gigapath", pretrained=True)
 
     elif extractor_name == 'owkin-phikon':
-        feature_extractor = OwkinPhikonFeatureExtractor()
+        original_transform = AutoImageProcessor.from_pretrained("owkin/phikon")
+        feature_extractor = OwkinPhikonFeatureExtractor(version="v1")
+    
+    elif extractor_name == 'owkin-phikon-v2':
+        original_transform = AutoImageProcessor.from_pretrained("owkin/phikon-v2")
+        feature_extractor = OwkinPhikonFeatureExtractor(version="v2")
 
     # ResNet18 trained with SimCLR on TCGA-Lung images (2.5x magnification): https://github.com/binli123/dsmil-wsi/issues/41
     elif extractor_name == 'simclr-tcga-lung_resnet18-2.5x':
