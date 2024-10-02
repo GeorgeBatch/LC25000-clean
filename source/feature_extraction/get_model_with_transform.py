@@ -122,6 +122,10 @@ def get_feature_extractor(extractor_name):
         original_transform = AutoImageProcessor.from_pretrained("owkin/phikon-v2")
         feature_extractor = OwkinPhikonFeatureExtractor(version="v2")
 
+    elif extractor_name == "H-optimus-0":
+        # suggested use (HuggingFace) with normalization: mean=(0.707223, 0.578729, 0.703617), std=(0.211883, 0.230117, 0.177517)
+        feature_extractor = timm.create_model("hf-hub:bioptimus/H-optimus-0", pretrained=True, init_values=1e-5, dynamic_img_size=False)
+
     # ResNet18 trained with SimCLR on TCGA-Lung images (2.5x magnification): https://github.com/binli123/dsmil-wsi/issues/41
     elif extractor_name == 'simclr-tcga-lung_resnet18-2.5x':
         feature_extractor = get_resnet18_dsmil(
