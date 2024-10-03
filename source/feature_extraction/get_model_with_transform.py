@@ -15,26 +15,26 @@ from source.feature_extraction.data import get_data_transform
 from source.feature_extraction.models.resnet_clam import resnet50_baseline
 from source.feature_extraction.models.resnet_dsmil import get_resnet18_dsmil
 from source.feature_extraction.models.owkin_phikon import OwkinPhikonFeatureExtractor
+from source.feature_extraction.models.hibou import HibouFeatureExtractor
 from source.constants import EXTRACTOR_NAMES_2_WEIGHTS_PATHS
 
 
 extractor_2_original_transform = {
-    # risize to STANDARD_INPUT_SIZE + normalize using mean and std
-    'imagenet_resnet18-last-layer': 'imagenet',
-    'imagenet_resnet50-clam-extractor': 'imagenet',
-    'dinov2_vits14': 'imagenet',
-    'dinov2_vitb14': 'imagenet',
-    'UNI': 'imagenet',
-    'prov-gigapath': 'imagenet',
-    'H-optimus-0': 'H-optimus-0',
+    # risize to STANDARD_INPUT_SIZE + normalize using ImageNet mean and std
+    "imagenet_resnet18-last-layer": "imagenet",
+    "imagenet_resnet50-clam-extractor": "imagenet",
+    "dinov2_vits14": "imagenet",
+    "dinov2_vitb14": "imagenet",
+    "UNI": "imagenet",
+    "prov-gigapath": "imagenet",
+    "owkin-phikon": "imagenet",
+    "owkin-phikon-v2": "imagenet",
+    # risize to STANDARD_INPUT_SIZE + normalize using mean and std constants provided by the authors
+    "hibou-b": "hibou",
+    "H-optimus-0": "H-optimus-0",
     # resize only
-    'simclr-tcga-lung_resnet18-2.5x': 'resize_only',
-    'simclr-tcga-lung_resnet18-10x': 'resize_only',
-    # pre-defined transforms provided together with the model through HuggingFace
-    'owkin-phikon': 'owkin-phikon',  # imagenet constants
-    'owkin-phikon-v2': 'owkin-phikon-v2',  # imagenet normalizaiton constants
-    'hibou-b': 'hibou-b',
-    'hibou-L': 'hibou-L',
+    "simclr-tcga-lung_resnet18-2.5x": "resize_only",
+    "simclr-tcga-lung_resnet18-10x": "resize_only",
 }
 
 
@@ -126,6 +126,12 @@ def get_feature_extractor(extractor_name):
     
     elif extractor_name == 'owkin-phikon-v2':
         feature_extractor = OwkinPhikonFeatureExtractor(version="v2")
+
+    elif extractor_name == "hibou-b":
+        feature_extractor = HibouFeatureExtractor(version="b")
+    
+    elif extractor_name == "hibou-L":
+        feature_extractor = HibouFeatureExtractor(version="L")
 
     elif extractor_name == "H-optimus-0":
         # suggested use (HuggingFace) with normalization: mean=(0.707223, 0.578729, 0.703617), std=(0.211883, 0.230117, 0.177517)
