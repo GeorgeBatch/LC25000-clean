@@ -28,6 +28,7 @@ def get_norm_constants(img_norm: str = 'imagenet'):
         'openai_clip': {'mean': (0.48145466, 0.4578275, 0.40821073), 'std': (0.26862954, 0.26130258, 0.27577711)},
         'uniform': {'mean': (0.5, 0.5, 0.5), 'std': (0.5, 0.5, 0.5)},
         'H-optimus-0': {'mean': (0.707223, 0.578729, 0.703617), 'std': (0.211883, 0.230117, 0.177517)}, # taken from HuggingFace
+        'hibou': {'mean': (0.7068, 0.5755, 0.722), 'std': (0.195, 0.2316, 0.181)}, # from AutoImageProcessor.from_pretrained("histai/hibou-b") or "histai/hibou-L"
     }
     try:
         constants = constants_zoo[img_norm]
@@ -70,15 +71,6 @@ def get_data_transform(img_norm: str = 'imagenet', mean=None, std=None):
             v2.ToDtype(torch.float32, scale=True),  # Normalize expects float input
             v2.Normalize(mean=mean, std=std),
         ])
-    elif img_norm == "owkin-phikon":
-        transform = AutoImageProcessor.from_pretrained("owkin/phikon")
-    elif img_norm == "owkin-phikon-v2":
-        transform = AutoImageProcessor.from_pretrained("owkin/phikon-v2")
-    elif img_norm == "hibou-b":
-        transform = AutoImageProcessor.from_pretrained("histai/hibou-b", trust_remote_code=True)
-    elif img_norm == "hibou-L":
-        transform = AutoImageProcessor.from_pretrained("histai/hibou-L", trust_remote_code=True)
-    
     else:
         assert img_norm in ALL_IMG_NORMS, f"Invalid normalization type: {img_norm}. Should be one of {ALL_IMG_NORMS}."
         mean, std = get_norm_constants(img_norm)
