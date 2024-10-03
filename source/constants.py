@@ -36,10 +36,17 @@ ALL_CANCER_TYPES = (
 assert len(ALL_CANCER_TYPES) == NUM_CLASSES, 'Number of cancer types should match NUM_CLASSES'
 
 ALL_IMG_NORMS = (
+    # risize to STANDARD_INPUT_SIZE + normalize using mean and std
     'imagenet',
     'openai_clip',
     'uniform',
     'resize_only',
+    'H-optimus-0',
+    # pre-defined transforms provided together with the model through HuggingFace
+    'owkin-phikon',
+    'owkin-phikon-v2',
+    'hibou-b',
+    'hibou-L',
     # dataset-specific
     'lc25k-lung_aca-resized',
     'lc25k-lung_scc-resized',

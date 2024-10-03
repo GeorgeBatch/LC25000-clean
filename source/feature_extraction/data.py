@@ -10,6 +10,8 @@ from torch.utils.data import Dataset
 from torchvision.io import read_image
 from torchvision.transforms import v2
 
+from transformers import AutoImageProcessor
+
 from source.constants import ALL_IMG_NORMS, DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH
 
 ################################################################################
@@ -68,6 +70,15 @@ def get_data_transform(img_norm: str = 'imagenet', mean=None, std=None):
             v2.ToDtype(torch.float32, scale=True),  # Normalize expects float input
             v2.Normalize(mean=mean, std=std),
         ])
+    elif img_norm == "owkin-phikon":
+        transform = AutoImageProcessor.from_pretrained("owkin/phikon")
+    elif img_norm == "owkin-phikon-v2":
+        transform = AutoImageProcessor.from_pretrained("owkin/phikon-v2")
+    elif img_norm == "hibou-b":
+        transform = AutoImageProcessor.from_pretrained("histai/hibou-b", trust_remote_code=True)
+    elif img_norm == "hibou-L":
+        transform = AutoImageProcessor.from_pretrained("histai/hibou-L", trust_remote_code=True)
+    
     else:
         assert img_norm in ALL_IMG_NORMS, f"Invalid normalization type: {img_norm}. Should be one of {ALL_IMG_NORMS}."
         mean, std = get_norm_constants(img_norm)

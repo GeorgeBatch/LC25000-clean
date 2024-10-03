@@ -5,7 +5,7 @@ import torchvision
 from torchvision.models import ResNet18_Weights
 
 import timm
-from transformers import AutoImageProcessor, AutoModel
+from transformers import AutoModel
 
 # # need to be installed in the environment
 # import uni  # https://github.com/mahmoodlab/UNI/?tab=readme-ov-file#installation
@@ -19,15 +19,22 @@ from source.constants import EXTRACTOR_NAMES_2_WEIGHTS_PATHS
 
 
 extractor_2_original_transform = {
+    # risize to STANDARD_INPUT_SIZE + normalize using mean and std
     'imagenet_resnet18-last-layer': 'imagenet',
     'imagenet_resnet50-clam-extractor': 'imagenet',
     'dinov2_vits14': 'imagenet',
     'dinov2_vitb14': 'imagenet',
     'UNI': 'imagenet',
     'prov-gigapath': 'imagenet',
-    'owkin-phikon': 'imagenet',
+    'H-optimus-0': 'H-optimus-0',
+    # resize only
     'simclr-tcga-lung_resnet18-2.5x': 'resize_only',
     'simclr-tcga-lung_resnet18-10x': 'resize_only',
+    # pre-defined transforms provided together with the model through HuggingFace
+    'owkin-phikon': 'owkin-phikon',  # imagenet constants
+    'owkin-phikon-v2': 'owkin-phikon-v2',  # imagenet normalizaiton constants
+    'hibou-b': 'hibou-b',
+    'hibou-L': 'hibou-L',
 }
 
 
@@ -115,11 +122,9 @@ def get_feature_extractor(extractor_name):
             "hf_hub:prov-gigapath/prov-gigapath", pretrained=True)
 
     elif extractor_name == 'owkin-phikon':
-        original_transform = AutoImageProcessor.from_pretrained("owkin/phikon")
         feature_extractor = OwkinPhikonFeatureExtractor(version="v1")
     
     elif extractor_name == 'owkin-phikon-v2':
-        original_transform = AutoImageProcessor.from_pretrained("owkin/phikon-v2")
         feature_extractor = OwkinPhikonFeatureExtractor(version="v2")
 
     elif extractor_name == "H-optimus-0":
