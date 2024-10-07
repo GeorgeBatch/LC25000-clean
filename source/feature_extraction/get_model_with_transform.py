@@ -134,7 +134,6 @@ def get_feature_extractor(extractor_name):
         feature_extractor = HibouFeatureExtractor(version="L")
 
     elif extractor_name == "H-optimus-0":
-        # suggested use (HuggingFace) with normalization: mean=(0.707223, 0.578729, 0.703617), std=(0.211883, 0.230117, 0.177517)
         feature_extractor = timm.create_model("hf-hub:bioptimus/H-optimus-0", pretrained=True, init_values=1e-5, dynamic_img_size=False)
 
     # ResNet18 trained with SimCLR on TCGA-Lung images (2.5x magnification): https://github.com/binli123/dsmil-wsi/issues/41
