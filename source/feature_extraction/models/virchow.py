@@ -24,12 +24,10 @@ class VirchowFeatureExtractor(nn.Module):
                 - 257 tokens = 1 cls token + 16*16 patch tokens
                 - 1280 features
         - v2 (paige-ai/Virchow2):
-            - output tensor
-                - pooler_output [batch_size, 1280] - the same as cls token at index 0
-                - last_hidden_state [batch_size, 261, 1280]
-                    - batch_size images
-                    - 261 tokens = 1 cls token + 4 DINOv2 register tokens + 16*16 patch tokens
-                    - 1280 features
+            - output tensor [batch_size, 261, 1280]
+                - batch_size images
+                - 261 tokens = 1 cls token + 4 DINOv2 register tokens + 16*16 patch tokens
+                - 1280 features
     """
     def __init__(self, version):
         super().__init__()
