@@ -5,6 +5,7 @@ import torchvision
 from torchvision.models import ResNet18_Weights
 
 import timm
+
 from transformers import AutoModel
 
 # # need to be installed in the environment
@@ -16,6 +17,7 @@ from source.feature_extraction.models.resnet_clam import resnet50_baseline
 from source.feature_extraction.models.resnet_dsmil import get_resnet18_dsmil
 from source.feature_extraction.models.owkin_phikon import OwkinPhikonFeatureExtractor
 from source.feature_extraction.models.hibou import HibouFeatureExtractor
+from sourtce.feature_extraction.models.virchow import VirchowFeatureExtractor
 from source.constants import EXTRACTOR_NAMES_2_WEIGHTS_PATHS
 
 
@@ -29,6 +31,8 @@ extractor_2_original_transform = {
     "prov-gigapath": "imagenet",
     "owkin-phikon": "imagenet",
     "owkin-phikon-v2": "imagenet",
+    "virchow-v1": "imagenet",
+    "virchow-v2": "imagenet",
     # risize to STANDARD_INPUT_SIZE + normalize using mean and std constants provided by the authors
     "hibou-b": "hibou",
     "H-optimus-0": "H-optimus-0",
@@ -132,6 +136,12 @@ def get_feature_extractor(extractor_name):
     
     elif extractor_name == "hibou-L":
         feature_extractor = HibouFeatureExtractor(version="L")
+
+    elif extractor_name == "virchow":
+        feature_extractor = VirchowFeatureExtractor(version="v1")
+    
+    elif extractor_name == "virchow-v2":
+        feature_extractor = VirchowFeatureExtractor(version="v2")
 
     elif extractor_name == "H-optimus-0":
         feature_extractor = timm.create_model("hf-hub:bioptimus/H-optimus-0", pretrained=True, init_values=1e-5, dynamic_img_size=False)
