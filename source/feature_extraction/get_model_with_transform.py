@@ -168,31 +168,3 @@ def get_feature_extractor(extractor_name):
             f"Extractor {extractor_name} not implemented.")
 
     return feature_extractor
-
-
-def get_feature_extractor_with_default_transform(extractor_name):
-    """
-    Get the feature extractor and data transform based on the given extractor name.
-
-    Args:
-        extractor_name (str): The name of the feature extractor. Must be one of the implemented models:
-            - 'imagenet_resnet18-last-layer'
-            - 'imagenet_resnet50-clam-extractor'
-            - 'dinov2_vits14'
-            - 'dinov2_vitb14'
-            - 'UNI'
-            - 'prov-gigapath'
-            - 'owkin-phikon'
-            - 'simclr-tcga-lung_resnet18-2.5x'
-            - 'simclr-tcga-lung_resnet18-10x'
-
-    Returns:
-        tuple: A tuple containing the feature extractor with corresponding default data transform.
-
-    Raises:
-        NotImplementedError: If the given extractor name is not implemented.
-    """
-
-    feature_extractor = get_feature_extractor(extractor_name)
-    data_transform = get_data_transform(extractor_2_original_transform[extractor_name])
-    return feature_extractor, data_transform
