@@ -17,7 +17,7 @@ from source.feature_extraction.models.resnet_clam import resnet50_baseline
 from source.feature_extraction.models.resnet_dsmil import get_resnet18_dsmil
 from source.feature_extraction.models.owkin_phikon import OwkinPhikonFeatureExtractor
 from source.feature_extraction.models.hibou import HibouFeatureExtractor
-from sourtce.feature_extraction.models.virchow import VirchowFeatureExtractor
+from source.feature_extraction.models.virchow import VirchowFeatureExtractor
 from source.constants import EXTRACTOR_NAMES_2_WEIGHTS_PATHS
 
 
