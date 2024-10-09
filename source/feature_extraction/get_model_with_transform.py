@@ -12,7 +12,6 @@ from transformers import AutoModel
 # import uni  # https://github.com/mahmoodlab/UNI/?tab=readme-ov-file#installation
 
 # local imports
-from source.feature_extraction.data import get_data_transform
 from source.feature_extraction.models.resnet_clam import resnet50_baseline
 from source.feature_extraction.models.resnet_dsmil import get_resnet18_dsmil
 from source.feature_extraction.models.owkin_phikon import OwkinPhikonFeatureExtractor
