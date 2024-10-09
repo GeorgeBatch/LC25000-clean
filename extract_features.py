@@ -188,7 +188,7 @@ def extract_features(feature_extractor, dataloader, device):
                        for path in paths]
         current_paths_list.extend(short_paths)
 
-        with torch.no_grad():
+        with torch.inference_mode():
             features = feature_extractor(inputs).cpu().numpy()
         # print(features.shape)
         current_features_list.append(features)
