@@ -21,27 +21,6 @@ from source.feature_extraction.models.virchow import VirchowFeatureExtractor
 from source.constants import EXTRACTOR_NAMES_2_WEIGHTS_PATHS
 
 
-extractor_2_original_transform = {
-    # risize to STANDARD_INPUT_SIZE + normalize using ImageNet mean and std
-    "imagenet_resnet18-last-layer": "imagenet",
-    "imagenet_resnet50-clam-extractor": "imagenet",
-    "dinov2_vits14": "imagenet",
-    "dinov2_vitb14": "imagenet",
-    "UNI": "imagenet",
-    "prov-gigapath": "imagenet",
-    "owkin-phikon": "imagenet",
-    "owkin-phikon-v2": "imagenet",
-    "virchow-v1": "imagenet",
-    "virchow-v2": "imagenet",
-    # risize to STANDARD_INPUT_SIZE + normalize using mean and std constants provided by the authors
-    "hibou-b": "hibou",
-    "H-optimus-0": "H-optimus-0",
-    # resize only
-    "simclr-tcga-lung_resnet18-2.5x": "resize_only",
-    "simclr-tcga-lung_resnet18-10x": "resize_only",
-}
-
-
 def get_feature_extractor(extractor_name):
     """
     Get the feature extractor based on the given extractor name.
