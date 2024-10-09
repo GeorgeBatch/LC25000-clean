@@ -260,7 +260,7 @@ if __name__ == '__main__':
                         choices=ALL_CANCER_TYPES)
     parser.add_argument("--img_norm", type=str, default='resize_only',
                         help="Image normalization type. 'original' means using image normalization constants recommended by the model authors.",
-                        choices=ALL_IMG_NORMS + ["original"])
+                        choices=list(ALL_IMG_NORMS) + ["original"])
     parser.add_argument("--extractor_name", type=str, default='UNI',
                         help="Feature extractor name.",
                         choices=ALL_EXTRACTOR_MODELS)
