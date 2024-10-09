@@ -34,6 +34,7 @@ feature_extractor_2_original_transform = {
     "virchow-v2": "imagenet",
     # risize to STANDARD_INPUT_SIZE + normalize using mean and std constants provided by the authors
     "hibou-b": "hibou",
+    "hibou-L": "hibou",
     "H-optimus-0": "H-optimus-0",
     # resize only
     "simclr-tcga-lung_resnet18-2.5x": "resize_only",
