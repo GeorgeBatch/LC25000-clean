@@ -55,6 +55,12 @@ def get_feature_extractor(extractor_name):
             - 'UNI'
             - 'prov-gigapath'
             - 'owkin-phikon'
+            - 'owkin-phikon-v2'
+            - 'hibou-b'
+            - 'hibou-L'
+            - 'virchow'
+            - 'virchow-v2'
+            - 'H-optimus-0'
             - 'simclr-tcga-lung_resnet18-2.5x'
             - 'simclr-tcga-lung_resnet18-10x'
         device (str): The device to use for computation. Defaults to 'cpu'.
