@@ -156,7 +156,7 @@ def prepare_feature_extractor(extractor_name, device):
     return feature_extractor
 
 
-def extract_features(feature_extractor, dataloader, device):
+def extract_features(feature_extractor, dataloader, device, precision="float32"):
     print(f'Using device: {device}')
 
     # check how img_dir is made in prepare_directories()
@@ -188,8 +188,15 @@ def extract_features(feature_extractor, dataloader, device):
                        for path in paths]
         current_paths_list.extend(short_paths)
 
+
         with torch.inference_mode():
-            features = feature_extractor(inputs).cpu().numpy()
+            if precision == "full":
+                features = feature_extractor(inputs).cpu().numpy()
+            elif precision == "half":
+                with torch.autocast(dtype=torch.float16):
+                    features = feature_extractor(inputs).cpu().numpy()
+            else:
+                raise NotImplementedError
         # print(features.shape)
         current_features_list.append(features)
 
@@ -259,6 +266,8 @@ if __name__ == '__main__':
                         choices=ALL_EXTRACTOR_MODELS)
     parser.add_argument("--device", type=str, default='cuda',
                         help="Device to use. 'cpu' or 'cuda' or 'cuda:<INDEX>'.")
+    parser.add_argument("--precision", type=str, default='full',
+                        choices=['full', 'half'],)
     parser.add_argument("--batch_size", type=int, default=256,
                         help="Batch size for feature extraction.")
     args = parser.parse_args()
