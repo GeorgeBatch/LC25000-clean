@@ -156,7 +156,7 @@ def prepare_feature_extractor(extractor_name, device):
     return feature_extractor
 
 
-def extract_features(feature_extractor, dataloader, device, precision="float32"):
+def extract_features(feature_extractor, dataloader, device, precision="full"):
     print(f'Using device: {device}')
 
     # check how img_dir is made in prepare_directories()
@@ -315,5 +315,6 @@ if __name__ == '__main__':
         feature_extractor=feature_extractor,
         dataloader=dataloader,
         device=device,
+        precision=args.precision,
     )
     save_features(contents=features_and_info, paths=features_save_paths)
