@@ -10,35 +10,17 @@ from torch.utils.data import Dataset
 from torchvision.io import read_image
 from torchvision.transforms import v2
 
-from source.constants import ALL_IMG_NORMS, DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH
+from source.constants import (
+    ALL_IMG_NORMS,
+    DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH,
+    FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM,
+)
 
 ################################################################################
 # Transforms
 ################################################################################
 
 STANDARD_INPUT_SIZE = 224
-
-feature_extractor_2_original_transform = {
-    # risize to STANDARD_INPUT_SIZE + normalize using ImageNet mean and std
-    "imagenet_resnet18-last-layer": "imagenet",
-    "imagenet_resnet50-clam-extractor": "imagenet",
-    "dinov2_vits14": "imagenet",
-    "dinov2_vitb14": "imagenet",
-    "UNI": "imagenet",
-    "prov-gigapath": "imagenet",
-    "owkin-phikon": "imagenet",
-    "owkin-phikon-v2": "imagenet",
-    "Virchow": "imagenet",
-    "Virchow2": "imagenet",
-    # risize to STANDARD_INPUT_SIZE + normalize using mean and std constants provided by the authors
-    "hibou-b": "hibou",
-    "hibou-L": "hibou",
-    "H-optimus-0": "H-optimus-0",
-    # resize only
-    "simclr-tcga-lung_resnet18-2.5x": "resize_only",
-    "simclr-tcga-lung_resnet18-10x": "resize_only",
-}
-
 
 def get_norm_constants(img_norm: str = 'imagenet'):
     # Source: https://github.com/mahmoodlab/UNI/blob/main/uni/get_encoder/get_encoder.py
@@ -104,7 +86,7 @@ def get_data_transform(img_norm: str = 'imagenet', mean=None, std=None):
 
 
 def get_original_image_transform(extractor_name: str):
-    return get_data_transform(feature_extractor_2_original_transform[extractor_name])
+    return get_data_transform(FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM[extractor_name])
 
 
 ################################################################################

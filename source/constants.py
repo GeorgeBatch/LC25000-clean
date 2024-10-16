@@ -71,6 +71,30 @@ ALL_EXTRACTOR_MODELS = (
     'simclr-tcga-lung_resnet18-2.5x',
 )
 
+FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM = {
+    # risize to STANDARD_INPUT_SIZE + normalize using ImageNet mean and std
+    "imagenet_resnet18-last-layer": "imagenet",
+    "imagenet_resnet50-clam-extractor": "imagenet",
+    "dinov2_vits14": "imagenet",
+    "dinov2_vitb14": "imagenet",
+    "UNI": "imagenet",
+    "prov-gigapath": "imagenet",
+    "owkin-phikon": "imagenet",
+    "owkin-phikon-v2": "imagenet",
+    "Virchow": "imagenet",
+    "Virchow2": "imagenet",
+    # risize to STANDARD_INPUT_SIZE + normalize using mean and std constants provided by the authors
+    "hibou-b": "hibou",
+    "hibou-L": "hibou",
+    "H-optimus-0": "H-optimus-0",
+    # resize only
+    "simclr-tcga-lung_resnet18-2.5x": "resize_only",
+    "simclr-tcga-lung_resnet18-10x": "resize_only",
+}
+assert set(FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM.keys()) == set(
+    ALL_EXTRACTOR_MODELS
+), f"FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM keys should match ALL_EXTRACTOR_MODELS. Difference: {set(FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM.keys()) ^ set(ALL_EXTRACTOR_MODELS)}"
+
 ORIGINAL_2_PRETTY_MODEL_NAMES = {
     'UNI': 'UNI',
     'prov-gigapath': 'Prov-GigaPath',
