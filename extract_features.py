@@ -20,7 +20,7 @@ from source.feature_extraction.data import (
     get_data_transform,
     get_original_image_transform,
 )
-from source.feature_extraction.get_model_with_transform import get_feature_extractor
+from source.feature_extraction.get_model import get_feature_extractor
 
 
 def prepare_directories(all_img_dir_path, all_features_save_dir, cancer_type, extractor_name, img_norm):

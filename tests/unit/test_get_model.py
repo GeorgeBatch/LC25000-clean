@@ -2,7 +2,7 @@ import pytest
 from torch import nn
 
 from source.constants import ALL_EXTRACTOR_MODELS
-from source.feature_extraction.get_model_with_transform import get_feature_extractor
+from source.feature_extraction.get_model import get_feature_extractor
 
 
 @pytest.mark.parametrize("model_name", ALL_EXTRACTOR_MODELS)
