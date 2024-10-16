@@ -6,28 +6,18 @@ from torchvision.models import ResNet18_Weights
 
 import timm
 
+from transformers import AutoModel
+
 # # need to be installed in the environment
 # import uni  # https://github.com/mahmoodlab/UNI/?tab=readme-ov-file#installation
 
 # local imports
-from source.feature_extraction.data import get_data_transform
 from source.feature_extraction.models.resnet_clam import resnet50_baseline
 from source.feature_extraction.models.resnet_dsmil import get_resnet18_dsmil
 from source.feature_extraction.models.owkin_phikon import OwkinPhikonFeatureExtractor
+from source.feature_extraction.models.hibou import HibouFeatureExtractor
+from source.feature_extraction.models.virchow import VirchowFeatureExtractor
 from source.constants import EXTRACTOR_NAMES_2_WEIGHTS_PATHS
-
-
-extractor_2_original_transform = {
-    'imagenet_resnet18-last-layer': 'imagenet',
-    'imagenet_resnet50-clam-extractor': 'imagenet',
-    'dinov2_vits14': 'imagenet',
-    'dinov2_vitb14': 'imagenet',
-    'UNI': 'imagenet',
-    'prov-gigapath': 'imagenet',
-    'owkin-phikon': 'imagenet',
-    'simclr-tcga-lung_resnet18-2.5x': 'resize_only',
-    'simclr-tcga-lung_resnet18-10x': 'resize_only',
-}
 
 
 def get_feature_extractor(extractor_name):
@@ -43,6 +33,12 @@ def get_feature_extractor(extractor_name):
             - 'UNI'
             - 'prov-gigapath'
             - 'owkin-phikon'
+            - 'owkin-phikon-v2'
+            - 'hibou-b'
+            - 'hibou-L'
+            - 'virchow'
+            - 'virchow-v2'
+            - 'H-optimus-0'
             - 'simclr-tcga-lung_resnet18-2.5x'
             - 'simclr-tcga-lung_resnet18-10x'
         device (str): The device to use for computation. Defaults to 'cpu'.
@@ -114,7 +110,25 @@ def get_feature_extractor(extractor_name):
             "hf_hub:prov-gigapath/prov-gigapath", pretrained=True)
 
     elif extractor_name == 'owkin-phikon':
-        feature_extractor = OwkinPhikonFeatureExtractor()
+        feature_extractor = OwkinPhikonFeatureExtractor(version="v1")
+    
+    elif extractor_name == 'owkin-phikon-v2':
+        feature_extractor = OwkinPhikonFeatureExtractor(version="v2")
+
+    elif extractor_name == "hibou-b":
+        feature_extractor = HibouFeatureExtractor(version="b")
+    
+    elif extractor_name == "hibou-L":
+        feature_extractor = HibouFeatureExtractor(version="L")
+
+    elif extractor_name == "Virchow":
+        feature_extractor = VirchowFeatureExtractor(version="v1")
+    
+    elif extractor_name == "Virchow2":
+        feature_extractor = VirchowFeatureExtractor(version="v2")
+
+    elif extractor_name == "H-optimus-0":
+        feature_extractor = timm.create_model("hf-hub:bioptimus/H-optimus-0", pretrained=True, init_values=1e-5, dynamic_img_size=False)
 
     # ResNet18 trained with SimCLR on TCGA-Lung images (2.5x magnification): https://github.com/binli123/dsmil-wsi/issues/41
     elif extractor_name == 'simclr-tcga-lung_resnet18-2.5x':
@@ -132,31 +146,3 @@ def get_feature_extractor(extractor_name):
             f"Extractor {extractor_name} not implemented.")
 
     return feature_extractor
-
-
-def get_feature_extractor_with_default_transform(extractor_name):
-    """
-    Get the feature extractor and data transform based on the given extractor name.
-
-    Args:
-        extractor_name (str): The name of the feature extractor. Must be one of the implemented models:
-            - 'imagenet_resnet18-last-layer'
-            - 'imagenet_resnet50-clam-extractor'
-            - 'dinov2_vits14'
-            - 'dinov2_vitb14'
-            - 'UNI'
-            - 'prov-gigapath'
-            - 'owkin-phikon'
-            - 'simclr-tcga-lung_resnet18-2.5x'
-            - 'simclr-tcga-lung_resnet18-10x'
-
-    Returns:
-        tuple: A tuple containing the feature extractor with corresponding default data transform.
-
-    Raises:
-        NotImplementedError: If the given extractor name is not implemented.
-    """
-
-    feature_extractor = get_feature_extractor(extractor_name)
-    data_transform = get_data_transform(extractor_2_original_transform[extractor_name])
-    return feature_extractor, data_transform

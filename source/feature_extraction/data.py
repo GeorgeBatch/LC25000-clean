@@ -10,7 +10,11 @@ from torch.utils.data import Dataset
 from torchvision.io import read_image
 from torchvision.transforms import v2
 
-from source.constants import ALL_IMG_NORMS, DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH
+from source.constants import (
+    ALL_IMG_NORMS,
+    DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH,
+    FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM,
+)
 
 ################################################################################
 # Transforms
@@ -18,13 +22,14 @@ from source.constants import ALL_IMG_NORMS, DATASET_SPECIFIC_NORMALIZATION_CONST
 
 STANDARD_INPUT_SIZE = 224
 
-
 def get_norm_constants(img_norm: str = 'imagenet'):
     # Source: https://github.com/mahmoodlab/UNI/blob/main/uni/get_encoder/get_encoder.py
     constants_zoo = {
         'imagenet': {'mean': (0.485, 0.456, 0.406), 'std': (0.229, 0.224, 0.225)},
         'openai_clip': {'mean': (0.48145466, 0.4578275, 0.40821073), 'std': (0.26862954, 0.26130258, 0.27577711)},
         'uniform': {'mean': (0.5, 0.5, 0.5), 'std': (0.5, 0.5, 0.5)},
+        'H-optimus-0': {'mean': (0.707223, 0.578729, 0.703617), 'std': (0.211883, 0.230117, 0.177517)}, # taken from HuggingFace model card
+        'hibou': {'mean': (0.7068, 0.5755, 0.722), 'std': (0.195, 0.2316, 0.181)}, # from AutoImageProcessor.from_pretrained("histai/hibou-b") or "histai/hibou-L"
     }
     try:
         constants = constants_zoo[img_norm]
@@ -78,6 +83,11 @@ def get_data_transform(img_norm: str = 'imagenet', mean=None, std=None):
         ])
 
     return transform
+
+
+def get_original_image_transform(extractor_name: str):
+    return get_data_transform(FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM[extractor_name])
+
 
 ################################################################################
 # Dataset Classes

@@ -15,8 +15,12 @@ from tqdm.auto import tqdm
 from source.constants import ALL_CANCER_TYPES
 from source.constants import ALL_IMG_NORMS, ALL_EXTRACTOR_MODELS
 from source.constants import DATA_DIR, FEATURE_VECTORS_SAVE_DIR, DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH
-from source.feature_extraction.data import FeatureExtractionDataset, get_data_transform
-from source.feature_extraction.get_model_with_transform import get_feature_extractor
+from source.feature_extraction.data import (
+    FeatureExtractionDataset,
+    get_data_transform,
+    get_original_image_transform,
+)
+from source.feature_extraction.get_model import get_feature_extractor
 
 
 def prepare_directories(all_img_dir_path, all_features_save_dir, cancer_type, extractor_name, img_norm):
@@ -152,7 +156,7 @@ def prepare_feature_extractor(extractor_name, device):
     return feature_extractor
 
 
-def extract_features(feature_extractor, dataloader, device):
+def extract_features(feature_extractor, dataloader, device, precision="full"):
     print(f'Using device: {device}')
 
     # check how img_dir is made in prepare_directories()
@@ -184,8 +188,15 @@ def extract_features(feature_extractor, dataloader, device):
                        for path in paths]
         current_paths_list.extend(short_paths)
 
-        with torch.no_grad():
-            features = feature_extractor(inputs).cpu().numpy()
+
+        with torch.inference_mode():
+            if precision == "full":
+                features = feature_extractor(inputs).cpu().numpy()
+            elif precision == "half":
+                with torch.autocast(dtype=torch.float16):
+                    features = feature_extractor(inputs).cpu().numpy()
+            else:
+                raise NotImplementedError
         # print(features.shape)
         current_features_list.append(features)
 
@@ -248,13 +259,15 @@ if __name__ == '__main__':
                         help="Cancer type name.",
                         choices=ALL_CANCER_TYPES)
     parser.add_argument("--img_norm", type=str, default='resize_only',
-                        help="Image normalization type.",
-                        choices=ALL_IMG_NORMS)
+                        help="Image normalization type. 'original' means using image normalization constants recommended by the model authors.",
+                        choices=list(ALL_IMG_NORMS) + ["original"])
     parser.add_argument("--extractor_name", type=str, default='UNI',
                         help="Feature extractor name.",
                         choices=ALL_EXTRACTOR_MODELS)
     parser.add_argument("--device", type=str, default='cuda',
                         help="Device to use. 'cpu' or 'cuda' or 'cuda:<INDEX>'.")
+    parser.add_argument("--precision", type=str, default='full',
+                        choices=['full', 'half'],)
     parser.add_argument("--batch_size", type=int, default=256,
                         help="Batch size for feature extraction.")
     args = parser.parse_args()
@@ -274,14 +287,19 @@ if __name__ == '__main__':
         'features': f'{features_save_dir}/features.npy'
     }
 
-    try:
-        data_transform = get_data_transform(img_norm=args.img_norm)
-    except KeyError as e:
-        print(f"Key {e} not found in either constansts_zoo of `data.get_norm_constants()` or data-specific transforms in {DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH}")
-        assert args.cancer_type in args.img_norm, f"Dataset-specific img_norm={args.img_norm} should include cancer_type={args.cancer_type} in its name."
-        mean, std = calculate_dataset_mean_std(img_dir=img_dir, batch_size=args.batch_size)
-        data_transform = get_data_transform(img_norm='manual', mean=mean, std=std)
-        update_dataset_specific_mean_std(json_path=DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH, mean=mean, std=std, img_norm=args.img_norm)
+    if args.img_norm == 'original':
+        # provided by the model authors
+        data_transform = get_original_image_transform(extractor_name=args.extractor_name)
+    else:
+        # specific data transform
+        try:
+            data_transform = get_data_transform(img_norm=args.img_norm)
+        except KeyError as e:
+            print(f"Key {e} not found in either constansts_zoo of `data.get_norm_constants()` or data-specific transforms in {DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH}")
+            assert args.cancer_type in args.img_norm, f"Dataset-specific img_norm={args.img_norm} should include cancer_type={args.cancer_type} in its name."
+            mean, std = calculate_dataset_mean_std(img_dir=img_dir, batch_size=args.batch_size)
+            data_transform = get_data_transform(img_norm='manual', mean=mean, std=std)
+            update_dataset_specific_mean_std(json_path=DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH, mean=mean, std=std, img_norm=args.img_norm)
 
     feature_extractor = prepare_feature_extractor(
         extractor_name=args.extractor_name,
@@ -297,5 +315,6 @@ if __name__ == '__main__':
         feature_extractor=feature_extractor,
         dataloader=dataloader,
         device=device,
+        precision=args.precision,
     )
     save_features(contents=features_and_info, paths=features_save_paths)
