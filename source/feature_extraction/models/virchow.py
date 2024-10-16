@@ -3,8 +3,8 @@ from torch import nn
 
 import timm
 from timm.layers import SwiGLUPacked
-from timm.data import resolve_data_config
-from timm.data.transforms_factory import create_transform
+# from timm.data import resolve_data_config
+# from timm.data.transforms_factory import create_transform
 
 
 class VirchowFeatureExtractor(nn.Module):

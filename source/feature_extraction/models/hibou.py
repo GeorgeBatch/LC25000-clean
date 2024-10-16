@@ -1,6 +1,5 @@
-import torch
 from torch import nn
-from transformers import ViTModel, AutoModel
+from transformers import AutoModel
 
 
 class HibouFeatureExtractor(nn.Module):

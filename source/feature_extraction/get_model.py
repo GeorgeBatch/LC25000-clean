@@ -6,8 +6,6 @@ from torchvision.models import ResNet18_Weights
 
 import timm
 
-from transformers import AutoModel
-
 # # need to be installed in the environment
 # import uni  # https://github.com/mahmoodlab/UNI/?tab=readme-ov-file#installation
 
@@ -111,19 +109,19 @@ def get_feature_extractor(extractor_name):
 
     elif extractor_name == 'owkin-phikon':
         feature_extractor = OwkinPhikonFeatureExtractor(version="v1")
-    
+
     elif extractor_name == 'owkin-phikon-v2':
         feature_extractor = OwkinPhikonFeatureExtractor(version="v2")
 
     elif extractor_name == "hibou-b":
         feature_extractor = HibouFeatureExtractor(version="b")
-    
+
     elif extractor_name == "hibou-L":
         feature_extractor = HibouFeatureExtractor(version="L")
 
     elif extractor_name == "Virchow":
         feature_extractor = VirchowFeatureExtractor(version="v1")
-    
+
     elif extractor_name == "Virchow2":
         feature_extractor = VirchowFeatureExtractor(version="v2")
 

@@ -188,7 +188,6 @@ def extract_features(feature_extractor, dataloader, device, precision="full"):
                        for path in paths]
         current_paths_list.extend(short_paths)
 
-
         with torch.inference_mode():
             if precision == "full":
                 features = feature_extractor(inputs).cpu().numpy()

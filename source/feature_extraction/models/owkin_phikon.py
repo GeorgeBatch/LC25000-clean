@@ -1,4 +1,3 @@
-import torch
 from torch import nn
 from transformers import ViTModel, AutoModel
 
@@ -35,7 +34,7 @@ class OwkinPhikonFeatureExtractor(nn.Module):
         if version == "v1":
             self.model = ViTModel.from_pretrained(
                 "owkin/phikon", add_pooling_layer=False)
-        
+
         elif version == "v2":
             self.model = AutoModel.from_pretrained("owkin/phikon-v2")
         else:
@@ -43,10 +42,10 @@ class OwkinPhikonFeatureExtractor(nn.Module):
 
     def forward(self, x):
         outputs = self.model(x)
-        
+
         cls_token = outputs.last_hidden_state[:, 0, :]
         # patch_tokens = outputs.last_hidden_state[:, 1:, :]
-        
+
         # if self.version == "v2":
         #     assert torch.equal(cls_token, outputs.pooler_output), "Pooler output and cls token should be the same for version={self.version}."
         return cls_token
