@@ -10,8 +10,6 @@ from torch.utils.data import Dataset
 from torchvision.io import read_image
 from torchvision.transforms import v2
 
-from transformers import AutoImageProcessor
-
 from source.constants import ALL_IMG_NORMS, DATASET_SPECIFIC_NORMALIZATION_CONSTANTS_PATH
 
 ################################################################################
