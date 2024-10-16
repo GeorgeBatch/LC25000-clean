@@ -30,8 +30,8 @@ feature_extractor_2_original_transform = {
     "prov-gigapath": "imagenet",
     "owkin-phikon": "imagenet",
     "owkin-phikon-v2": "imagenet",
-    "virchow-v1": "imagenet",
-    "virchow-v2": "imagenet",
+    "Virchow": "imagenet",
+    "Virchow2": "imagenet",
     # risize to STANDARD_INPUT_SIZE + normalize using mean and std constants provided by the authors
     "hibou-b": "hibou",
     "hibou-L": "hibou",

@@ -121,10 +121,10 @@ def get_feature_extractor(extractor_name):
     elif extractor_name == "hibou-L":
         feature_extractor = HibouFeatureExtractor(version="L")
 
-    elif extractor_name == "virchow":
+    elif extractor_name == "Virchow":
         feature_extractor = VirchowFeatureExtractor(version="v1")
     
-    elif extractor_name == "virchow-v2":
+    elif extractor_name == "Virchow2":
         feature_extractor = VirchowFeatureExtractor(version="v2")
 
     elif extractor_name == "H-optimus-0":
