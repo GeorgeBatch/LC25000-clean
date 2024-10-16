@@ -4,8 +4,27 @@ from torchvision.io import read_image
 from torch import nn
 
 from source.constants import FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM, ALL_EXTRACTOR_MODELS
-from source.feature_extraction.data import get_original_image_transform
+from source.feature_extraction.data import get_original_image_transform, FeatureExtractionDataset
 from source.feature_extraction.get_model import get_feature_extractor
+
+
+def test_feature_extraction_dataset_instantiation(mock_img_dir):
+    dataset = FeatureExtractionDataset(img_dir=mock_img_dir, img_ext="jpeg")
+    assert isinstance(
+        dataset, FeatureExtractionDataset
+    ), "Failed to instantiate FeatureExtractionDataset"
+
+
+def test_feature_extraction_dataset_length(mock_img_dir):
+    dataset = FeatureExtractionDataset(img_dir=mock_img_dir, img_ext="jpeg")
+    assert len(dataset) == 1, f"Expected dataset length to be 1, but got {len(dataset)}"
+
+
+def test_feature_extraction_dataset_getitem(mock_img_dir):
+    dataset = FeatureExtractionDataset(img_dir=mock_img_dir, img_ext="jpeg")
+    sample = dataset[0]
+    assert "image" in sample, "Sample does not contain 'image' key"
+    assert isinstance(sample["image"], torch.Tensor), "Sample 'image' is not a tensor"
 
 
 @pytest.mark.parametrize("model_name", FEATURE_EXTRACTOR_2_ORIGINAL_TRANSFORM.keys())
