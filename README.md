@@ -4,7 +4,7 @@
 
 *Best paper award at 2nd Workshop on Data Engineering in Medical Imaging (DEMI), MICCAI 2024*
 
-Paper Link | [Open Access Record*](https://ora.ox.ac.uk/objects/uuid:df7ad16b-f130-4f16-8f7f-aab5de53f111) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | [Cite](#cite)
+[Paper Link](https://link.springer.com/chapter/10.1007/978-3-031-73748-0_2) | [Open Access Record*](https://ora.ox.ac.uk/objects/uuid:df7ad16b-f130-4f16-8f7f-aab5de53f111) | [Code](https://github.com/GeorgeBatch/LC25000-clean) | [Cite](#cite)
 
 *Full open-access text will be available after the embargo period from October 2025.
 
@@ -220,12 +220,18 @@ This project relied on other repositories.
 Pre-publication citation. Will be updated after the workshop date (10th of October 2024).
 
 ```
-@inproceedings{batchkala2024lc25000-clean,
-  title = {Evaluating histopathology foundation models for few-shot tissue clustering: an application to LC25000 augmented dataset cleaning},
-  author = {Batchkala, G and Li, B and Rittscher, J},
-  editor = {Bhattarai, B and Ali, S and Rau, A and Caramalau, R and Nguyen, A and Gyawali, P and Namburete, A and Stoyanov, D},
-  year = {2024},
-  organizer = {2nd International Workshop on Data Engineering in Medical Imaging (DEMI 2024) at MICCAI 2024},
+@inproceedings{batchkala2025EvaluatingHistopathologyFoundation,
+  title = {Evaluating {{Histopathology Foundation Models}} for~{{Few-Shot Tissue Clustering}}: {{An~Application}} to~{{LC25000 Augmented Dataset Cleaning}}},
+  shorttitle = {Evaluating {{Histopathology Foundation Models}} for~{{Few-Shot Tissue Clustering}}},
+  booktitle = {Data {{Engineering}} in {{Medical Imaging}}},
+  author = {Batchkala, George and Li, Bin and Rittscher, Jens},
+  editor = {Bhattarai, Binod and Ali, Sharib and Rau, Anita and Caramalau, Razvan and Nguyen, Anh and Gyawali, Prashnna and Namburete, Ana and Stoyanov, Danail},
+  year = {2025},
+  pages = {11--21},
   publisher = {Springer Nature Switzerland},
+  address = {Cham},
+  doi = {10.1007/978-3-031-73748-0_2},
+  isbn = {978-3-031-73748-0},
+  langid = {english}
 }
 ```
