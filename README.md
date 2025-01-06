@@ -217,7 +217,7 @@ This project relied on other repositories.
 
 ## Cite
 
-Pre-publication citation. Will be updated after the workshop date (10th of October 2024).
+If found this repository useful for your research, please consider citing our paper:
 
 ```
 @inproceedings{batchkala2025EvaluatingHistopathologyFoundation,
