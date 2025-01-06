@@ -1,6 +1,7 @@
 # built-in imports
 import argparse
 import os
+import sys
 import json
 from copy import deepcopy
 
@@ -208,6 +209,14 @@ def main():
     parser.add_argument('--verbose', action='store_true',
                         help='Print metrics to stdout.')
     args = parser.parse_args()
+
+    print('\n', "-" * 48, '\n')
+    print("Arguments passed to the script:")
+    print("\nargs - raw:")
+    print(sys.argv)
+    print("\nargs:")
+    print(args)
+    print('\n', "-" * 48, '\n')
 
     if args.manual_annotations_dir is not None:
         assert os.path.isdir(args.manual_annotations_dir)
