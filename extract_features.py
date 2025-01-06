@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 import json
 
 import numpy as np
@@ -270,6 +271,14 @@ if __name__ == '__main__':
     parser.add_argument("--batch_size", type=int, default=256,
                         help="Batch size for feature extraction.")
     args = parser.parse_args()
+
+    print('\n', "-" * 48, '\n')
+    print("Arguments passed to the script:")
+    print("\nargs - raw:")
+    print(sys.argv)
+    print("\nargs:")
+    print(args)
+    print('\n', "-" * 48, '\n')
 
     device = args.device if torch.cuda.is_available() else 'cpu'
 
