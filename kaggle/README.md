@@ -1,15 +1,14 @@
-# kaggle/
+# LC25000 Clean Image Groups
 
-This directory contains everything needed to share the LC25000 tile-group annotations on Kaggle.
+Manually-verified tile-group annotations for the [LC25000](https://arxiv.org/abs/1912.12142v1) lung and colon histopathology dataset.
 
-## Contents
+LC25000 was created by augmenting 250 original tissue tiles per class (1,250 tiles total) with random rotations and flips, producing ~20 correlated copies per tile. Splitting the dataset randomly leaks copies of the same tile into both train and test sets (~98% of tile-groups are contaminated), inflating reported accuracy.
 
-| File | Description |
-|---|---|
-| `make_image_groups_csv.py` | Builds `lc25000_image_groups.csv` from the repo's annotation files |
-| `lc25000_image_groups.csv` | The consolidated group annotation CSV (upload this to Kaggle) |
-| `dataset-metadata.json` | Kaggle Datasets API metadata for publishing the CSV |
-| `lc25000-clean-proper-splits.ipynb` | Kaggle notebook demonstrating leakage and proper splitting |
+This dataset provides a single CSV (`lc25000_image_groups.csv`) assigning each of the 25,000 images to its original tile group (`group_id`), enabling proper group-aware train/test splitting.
+
+See the companion notebook **[LC25000: Avoiding Augmentation Leakage](https://www.kaggle.com/code/gbatchkala/lc25000-avoiding-augmentation-leakage)** for a full walkthrough.
+
+Based on: Batchkala et al., *Evaluating Histopathology Foundation Models for Few-Shot Tissue Clustering: An Application to LC25000 Augmented Dataset Cleaning*, DEMI @ MICCAI 2024 (**Best Paper Award**). DOI: [10.1007/978-3-031-73748-0_2](https://doi.org/10.1007/978-3-031-73748-0_2) | [GitHub](https://github.com/GeorgeBatch/LC25000-clean)
 
 ## CSV column schema
 
@@ -23,45 +22,6 @@ This directory contains everything needed to share the LC25000 tile-group annota
 | `group_id` | `743` | **Globally unique group id across all 5 classes** — use this for splitting |
 
 There are 25,000 rows (5,000 per class) and 1,246 distinct `group_id`s.
-
-## Rebuilding the CSV
-
-```shell
-python kaggle/make_image_groups_csv.py
-```
-
-Run from the repo root. Requires only Python stdlib — no extra packages needed.
-
-## Publishing to Kaggle
-
-### Step 1: install the Kaggle CLI and add your API token
-
-```shell
-pip install kaggle          # or: uv pip install kaggle
-# download ~/.kaggle/kaggle.json from kaggle.com → Account → Create New API Token
-chmod 600 ~/.kaggle/kaggle.json
-```
-
-### Step 2: set your Kaggle username in dataset-metadata.json
-
-Edit the `"id"` field in `kaggle/dataset-metadata.json`:
-```json
-"id": "YOUR_KAGGLE_USERNAME/lc25000-clean-groups"
-```
-
-### Step 3: publish the dataset
-
-```shell
-kaggle datasets create -p kaggle/
-```
-
-### Step 4: publish the notebook
-
-Create `kaggle/kernel-metadata.json` (fill in your username and dataset slugs), then:
-
-```shell
-kaggle kernels push -p kaggle/
-```
 
 ## Quick-use snippet
 
@@ -77,4 +37,19 @@ train_idx, test_idx = next(gss.split(df, groups=df['group_id']))
 train_df, test_df = df.iloc[train_idx], df.iloc[test_idx]
 
 assert len(set(train_df['group_id']) & set(test_df['group_id'])) == 0  # no leak
+```
+
+## Citation
+
+```bibtex
+@inproceedings{batchkala2025EvaluatingHistopathologyFoundation,
+  title     = {Evaluating {Histopathology Foundation Models} for~{Few-Shot Tissue Clustering}:
+               {An~Application} to~{LC25000 Augmented Dataset Cleaning}},
+  author    = {Batchkala, George and Li, Bin and Rittscher, Jens},
+  booktitle = {Data Engineering in Medical Imaging},
+  pages     = {11--21},
+  year      = {2025},
+  publisher = {Springer Nature Switzerland},
+  doi       = {10.1007/978-3-031-73748-0_2},
+}
 ```
