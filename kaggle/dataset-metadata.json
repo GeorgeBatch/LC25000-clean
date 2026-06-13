@@ -1,10 +1,54 @@
 {
   "title": "LC25000 Clean Image Groups",
   "id": "gbatchkala/lc25000-clean-groups",
+  "subtitle": "Tile-group annotations for leak-free splitting of LC25000",
   "licenses": [
     {
       "name": "CC BY 4.0"
     }
   ],
-  "description": "Manually-verified tile-group annotations for the LC25000 lung and colon histopathology dataset.\n\nLC25000 was created by augmenting 250 original tissue tiles per class (1,250 tiles total) with random rotations and flips, producing ~20 augmented copies per tile. Splitting the dataset randomly leaks copies of the same tile into both train and test sets (~98% of tile-groups are contaminated), inflating reported accuracy.\n\nThis dataset provides a single CSV (lc25000_image_groups.csv) assigning each of the 25,000 images to its original tile group (group_id), enabling proper group-aware train/test splitting.\n\nColumns: stem, filename, label, tissue, local_cluster_label, group_id\n\nSee the companion notebook and GitHub repo for usage: https://github.com/GeorgeBatch/LC25000-clean\n\nBased on: Batchkala et al., 'Evaluating Histopathology Foundation Models for Few-Shot Tissue Clustering: An Application to LC25000 Augmented Dataset Cleaning', DEMI @ MICCAI 2024. https://doi.org/10.1007/978-3-031-73748-0_2"
+  "keywords": [
+    "biology",
+    "health",
+    "computer vision",
+    "image",
+    "classification",
+    "cancer",
+    "deep learning"
+  ],
+  "description": "Manually-verified tile-group annotations for the LC25000 lung and colon histopathology dataset.\n\nLC25000 was created by augmenting 250 original tissue tiles per class (1,250 tiles total) with random rotations and flips, producing ~20 augmented copies per tile. Splitting the dataset randomly leaks copies of the same tile into both train and test sets (~98% of tile-groups are contaminated), inflating reported accuracy.\n\nThis dataset provides a single CSV (lc25000_image_groups.csv) assigning each of the 25,000 images to its original tile group (group_id), enabling proper group-aware train/test splitting.\n\nBased on: Batchkala et al., 'Evaluating Histopathology Foundation Models for Few-Shot Tissue Clustering: An Application to LC25000 Augmented Dataset Cleaning', DEMI @ MICCAI 2024. https://doi.org/10.1007/978-3-031-73748-0_2\n\nGitHub: https://github.com/GeorgeBatch/LC25000-clean",
+  "resources": [
+    {
+      "path": "lc25000_image_groups.csv",
+      "description": "One row per image (25,000 total). Maps each LC25000 image filename to its original tissue tile group, enabling group-aware train/test splitting that avoids augmentation-induced data leakage.",
+      "schema": {
+        "fields": [
+          {
+            "name": "stem",
+            "description": "Filename without extension (e.g. lungaca1352). Use this to match images regardless of file extension."
+          },
+          {
+            "name": "filename",
+            "description": "Full image filename including extension (e.g. lungaca1352.jpeg)."
+          },
+          {
+            "name": "label",
+            "description": "Class name matching the dataset folder structure: colon_aca, colon_n, lung_aca, lung_n, or lung_scc."
+          },
+          {
+            "name": "tissue",
+            "description": "Tissue type: lung or colon."
+          },
+          {
+            "name": "local_cluster_label",
+            "description": "Per-class tile group index (0-indexed, unique within each label). 243-257 groups per class."
+          },
+          {
+            "name": "group_id",
+            "description": "Globally unique tile group id across all 5 classes (1,246 distinct values). Use this column as the groups argument in GroupShuffleSplit or StratifiedGroupKFold to prevent data leakage."
+          }
+        ]
+      }
+    }
+  ]
 }
