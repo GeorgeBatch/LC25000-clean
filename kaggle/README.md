@@ -31,7 +31,10 @@ from sklearn.model_selection import GroupShuffleSplit
 
 groups_df = pd.read_csv('/kaggle/input/lc25000-clean-groups/lc25000_image_groups.csv')
 
-# merge group_id onto your image DataFrame by stem, then:
+# df is your image DataFrame with at least a 'stem' column (filename without extension).
+# Merge group_id in, then split:
+df = df.merge(groups_df[['stem', 'group_id']], on='stem', how='left')
+
 gss = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 train_idx, test_idx = next(gss.split(df, groups=df['group_id']))
 train_df, test_df = df.iloc[train_idx], df.iloc[test_idx]
