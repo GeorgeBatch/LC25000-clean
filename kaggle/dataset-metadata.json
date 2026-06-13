@@ -1,7 +1,7 @@
 {
   "title": "LC25000 Clean Image Groups",
   "id": "gbatchkala/lc25000-clean-groups",
-  "isPrivate": true,
+  "isPrivate": false,
   "subtitle": "Tile-group annotations for leak-free splitting of LC25000",
   "licenses": [
     {
