@@ -1,0 +1,10 @@
+{
+  "title": "LC25000 Clean Image Groups (Batchkala et al. 2025)",
+  "id": "REPLACE_WITH_YOUR_KAGGLE_USERNAME/lc25000-clean-groups",
+  "licenses": [
+    {
+      "name": "CC BY 4.0"
+    }
+  ],
+  "description": "Manually-verified tile-group annotations for the LC25000 lung and colon histopathology dataset.\n\nLC25000 was created by augmenting 250 original tissue tiles per class (1,250 tiles total) with random rotations and flips, producing ~20 augmented copies per tile. Splitting the dataset randomly leaks copies of the same tile into both train and test sets (~98% of tile-groups are contaminated), inflating reported accuracy.\n\nThis dataset provides a single CSV (lc25000_image_groups.csv) assigning each of the 25,000 images to its original tile group (group_id), enabling proper group-aware train/test splitting.\n\nColumns: stem, filename, label, tissue, local_cluster_label, group_id\n\nSee the companion notebook and GitHub repo for usage: https://github.com/GeorgeBatch/LC25000-clean\n\nBased on: Batchkala et al., 'Evaluating Histopathology Foundation Models for Few-Shot Tissue Clustering: An Application to LC25000 Augmented Dataset Cleaning', DEMI @ MICCAI 2024. https://doi.org/10.1007/978-3-031-73748-0_2"
+}
