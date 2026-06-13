@@ -7,7 +7,7 @@
   "is_private": true,
   "enable_gpu": true,
   "enable_tpu": false,
-  "enable_internet": false,
+  "enable_internet": true,
   "dataset_sources": [
     "gbatchkala/lc25000-clean-groups",
     "javaidahmadwani/lc25000"
